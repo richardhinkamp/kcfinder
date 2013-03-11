@@ -8,5 +8,11 @@
     },
     "require-dev": {
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "KCFinder": "src/"
+        }
+    }
+
 }
