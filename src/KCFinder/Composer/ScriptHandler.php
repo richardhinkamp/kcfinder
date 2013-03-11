@@ -31,15 +31,16 @@ class ScriptHandler
             return;
         }
 
-        $targetDir = $webDir . '/kcfinder/';
+        $baseDir = getcwd() . '/' . $webDir . '/';
+        $targetDir = $baseDir . 'kcfinder';
 
         $filesystem = new Filesystem();
         $filesystem->remove($targetDir);
-        $originDir = __DIR__ . '../../../';
+        $originDir = realpath(__DIR__ . '/../../../');
 
         if ($symlink) {
             if ($relative) {
-                $relativeOriginDir = $filesystem->makePathRelative($originDir, realpath($targetDir));
+                $relativeOriginDir = $filesystem->makePathRelative($originDir, realpath($baseDir));
             } else {
                 $relativeOriginDir = $originDir;
             }
