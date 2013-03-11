@@ -100,6 +100,12 @@ class uploader {
   * @var string */
     protected $cms = "";
 
+    /**
+     * Filename of config file
+     * @var string
+     */
+    protected $configFile = 'config.php';
+
 /** Magic method which allows read-only access to protected or private class properties
   * @param string $property
   * @return mixed */
@@ -108,6 +114,10 @@ class uploader {
     }
 
     public function __construct() {
+
+        if (isset($_SERVER['DOCUMENT_ROOT']) && file_exists($_SERVER['DOCUMENT_ROOT'].'/kcfinder-config.php')) {
+            $this->configFile = $_SERVER['DOCUMENT_ROOT'].'/kcfinder-config.php';
+        }
 
         // DISABLE MAGIC QUOTES
         if (function_exists('set_magic_quotes_runtime'))
@@ -130,7 +140,7 @@ class uploader {
             $this->file = &$_FILES[key($_FILES)];
 
         // LOAD DEFAULT CONFIGURATION
-        require "config.php";
+        require $this->configFile;
 
         // SETTING UP SESSION
         if (isset($_CONFIG['_sessionLifetime']))
@@ -145,7 +155,7 @@ class uploader {
         }
 
         // RELOAD DEFAULT CONFIGURATION
-        require "config.php";
+        require $this->configFile;
         $this->config = $_CONFIG;
 
         // LOAD SESSION CONFIGURATION IF EXISTS
