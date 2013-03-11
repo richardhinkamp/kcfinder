@@ -4,6 +4,7 @@
     "homepage": "https://github.com/richardhinkamp/kcfinder",
     "license": "CC-BY-3.0",
     "require": {
+        "symfony/filesystem": "2.*"
     },
     "require-dev": {
     },
